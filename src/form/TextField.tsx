@@ -1,16 +1,29 @@
 import React from "react";
-import { Box, TextInput } from "grommet";
+import { Box, TextInput, Text } from "grommet";
+import "./textField.css";
+
+interface AddressFormProps {
+  callback: any;
+  placeholder: string;
+  label: string;
+  [x: string]: any;
+}
 
 const AddressForm = ({
   callback,
   placeholder,
-}: {
-  callback: any;
-  placeholder: string;
-}) => {
+  label,
+  name,
+  ...restOfPros
+}: AddressFormProps) => {
   const [value, setValue] = React.useState("");
   return (
     <Box>
+      {label && (
+        <label htmlFor={name} className="formLabel">
+          <Text size="large">{label}</Text>
+        </label>
+      )}
       <TextInput
         placeholder={placeholder}
         value={value}
@@ -18,6 +31,7 @@ const AddressForm = ({
           setValue(event.target.value);
           callback(event.target.value);
         }}
+        {...restOfPros}
       />
     </Box>
   );
