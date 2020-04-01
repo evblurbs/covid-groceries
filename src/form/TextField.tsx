@@ -1,36 +1,38 @@
 import React from "react";
 import { Box, TextInput, Text } from "grommet";
+import Header from "../components/Header";
 import "./textField.css";
 
 interface AddressFormProps {
-  callback: any;
+  onChange: any;
+  value: string;
   placeholder: string;
   label: string;
+  desc?: string;
   [x: string]: any;
 }
 
 const AddressForm = ({
-  callback,
+  value,
+  onChange,
   placeholder,
   label,
   name,
+  desc,
   ...restOfPros
 }: AddressFormProps) => {
-  const [value, setValue] = React.useState("");
   return (
     <Box>
       {label && (
         <label htmlFor={name} className="formLabel">
-          <Text size="large">{label}</Text>
+          <Header>{label}</Header>
         </label>
       )}
+      {desc && <Text margin={{ bottom: "small" }}>{desc}</Text>}
       <TextInput
         placeholder={placeholder}
         value={value}
-        onChange={(event) => {
-          setValue(event.target.value);
-          callback(event.target.value);
-        }}
+        onChange={onChange}
         {...restOfPros}
       />
     </Box>

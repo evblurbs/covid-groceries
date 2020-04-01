@@ -1,43 +1,38 @@
 import React, { useState } from "react";
 import { Box, RadioButtonGroup, Text, Heading } from "grommet";
 import { Bundle, Cafeteria } from "grommet-icons";
+import Header from "../components/Header";
 
 const Bundles = () => {
   const [value, setValue] = useState();
   return (
     <Box
+      width="large"
       height={{
-        min: "unset"
+        min: "unset",
       }}
     >
-      <Heading
-        level={2}
-        margin={{
-          horizontal: "auto"
-        }}
-      >
-        Bundles
-      </Heading>
+      <Header>Bundles</Header>
       <RadioButtonGroup
         name="bundles"
         direction="row"
         gap="medium"
         pad="large"
         height={{
-          min: "unset"
+          min: "unset",
         }}
         options={[
           {
             label: "Essentials",
-            value: "essentials"
+            value: "essentials",
           },
           {
             label: "Frozen",
-            value: "frozen"
-          }
+            value: "frozen",
+          },
         ]}
         value={value}
-        onChange={event => setValue(event.target.value)}
+        onChange={(event) => setValue(event.target.value)}
       >
         {(
           option: any,
@@ -61,7 +56,7 @@ const Bundles = () => {
               <Heading
                 level={4}
                 margin={{
-                  bottom: "small"
+                  bottom: "small",
                 }}
               >
                 {option.label}

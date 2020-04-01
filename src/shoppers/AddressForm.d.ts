@@ -20,3 +20,4 @@ declare module "react-load-script" {
 }
 
 declare var google: any;
+declare var document: any;

@@ -1,3 +1,16 @@
 .formLabel {
   margin-bottom: 8px;
 }
+
+.pac-item {
+  padding: 12px 16px;
+  font-size: 16px;
+}
+
+.pac-item-query {
+  font-size: 20px;
+}
+
+.pac-item:hover {
+  background-color: rgba(221, 221, 221, 0.4);
+}
