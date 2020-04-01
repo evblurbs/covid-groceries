@@ -2,6 +2,8 @@ import React from "react";
 import { Box, Grommet, Heading, Button } from "grommet";
 import { Notification } from "grommet-icons";
 import AddressForm from "./AddressForm";
+import Bundles from "./Bundles";
+import Phone from "./Phone";
 
 const theme = {
   global: {
@@ -42,6 +44,8 @@ function App() {
         <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
           <Box flex align="center" justify="center">
             <AddressForm />
+            <Bundles />
+            <Phone />
           </Box>
           <Box
             width="medium"
