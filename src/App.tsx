@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Grommet, Heading, Button } from "grommet";
 import { Notification } from "grommet-icons";
+import AddressForm from "./AddressForm";
 
 const theme = {
   global: {
@@ -40,7 +41,7 @@ function App() {
         </AppBar>
         <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
           <Box flex align="center" justify="center">
-            app body
+            <AddressForm />
           </Box>
           <Box
             width="medium"
