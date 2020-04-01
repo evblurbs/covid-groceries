@@ -11,9 +11,9 @@ const theme = {
     font: {
       family: "Roboto",
       size: "18px",
-      height: "20px",
-    },
-  },
+      height: "20px"
+    }
+  }
 };
 
 const AppBar = (props: any) => (
@@ -32,7 +32,7 @@ const AppBar = (props: any) => (
 
 function App() {
   return (
-    <Grommet theme={theme} full>
+    <Grommet theme={theme}>
       <Box fill>
         <AppBar>
           Hello
