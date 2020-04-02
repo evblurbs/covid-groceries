@@ -8,12 +8,11 @@ import TextField from "../form/TextField";
 import Navigate from "../form/Navigate";
 import { GOOGLE_API_KEY } from "../utils/constants";
 import { StepCallback } from "../interfaces";
+import { screenIds } from "../routes/Recipient";
 
 let autocomplete: any = null;
 
-const screenId = "ADDRESS";
-
-const AddressForm = ({ back, next, ...rest }: StepCallback) => {
+const AddressForm = ({ next }: StepCallback) => {
   const [address, setAddress] = useState("");
   const [disabled, setDisabled] = useState(true);
   const [response, setResponse] = useState({});
@@ -29,7 +28,7 @@ const AddressForm = ({ back, next, ...rest }: StepCallback) => {
     setAddress(formatted_address);
     setResponse({
       inputs: { location: { lat, lng }, formatted_address },
-      screenId,
+      screenId: screenIds.ADDRESS,
     });
   };
 
@@ -90,7 +89,7 @@ const AddressForm = ({ back, next, ...rest }: StepCallback) => {
         label="Address"
         desc="Enter an address where you would like to get groceries delivered to."
       />
-      <Navigate disabled={disabled} onClick={onSubmit} />
+      <Navigate disabled={disabled} onClick={onSubmit} backPath="/" />
     </Box>
   );
 };

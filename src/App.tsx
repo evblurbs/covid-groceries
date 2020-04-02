@@ -16,16 +16,6 @@ const theme = {
   },
 };
 
-interface StepCallback {
-  step: number;
-  keys: any;
-}
-
-export interface AppCallbacks {
-  back: () => void;
-  next: () => any;
-}
-
 const AppBar = (props: any) => (
   <Box
     tag="header"

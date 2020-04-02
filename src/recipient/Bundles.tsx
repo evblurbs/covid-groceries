@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import { Box, RadioButtonGroup, Text, Heading } from "grommet";
 import { Bundle, Cafeteria } from "grommet-icons";
+import Navigate from "../form/Navigate";
 import Header from "../components/Header";
+import { screenIds, PATH_DELIVERY } from "../routes/Recipient";
+import { StepCallback } from "../interfaces";
 
-const Bundles = () => {
-  const [value, setValue] = useState();
+const Bundles = ({ next }: StepCallback) => {
+  const [bundle, setBundle] = useState();
+  const onSubmit = () =>
+    next({
+      screenId: screenIds.BUNDLES,
+      inputs: { bundle },
+    });
   return (
     <Box
       width="large"
@@ -31,8 +39,8 @@ const Bundles = () => {
             value: "frozen",
           },
         ]}
-        value={value}
-        onChange={(event) => setValue(event.target.value)}
+        value={bundle}
+        onChange={(event) => setBundle(event.target.value)}
       >
         {(
           option: any,
@@ -66,6 +74,7 @@ const Bundles = () => {
           );
         }}
       </RadioButtonGroup>
+      <Navigate onClick={onSubmit} backPath={PATH_DELIVERY} />
     </Box>
   );
 };
