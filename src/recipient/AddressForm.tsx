@@ -13,7 +13,7 @@ let autocomplete: any = null;
 
 const screenId = "ADDRESS";
 
-const AddressForm = ({ back, next }: StepCallback) => {
+const AddressForm = ({ back, next, ...rest }: StepCallback) => {
   const [address, setAddress] = useState("");
   const [disabled, setDisabled] = useState(true);
   const [response, setResponse] = useState({});

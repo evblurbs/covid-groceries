@@ -1,12 +1,9 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Route, Link, BrowserRouter as Router } from "react-router-dom";
-import { Box, Grommet, Heading, Button } from "grommet";
-import { Home } from "grommet-icons";
-import AddressForm from "./shoppers/AddressForm";
-import Bundles from "./shoppers/Bundles";
-import Phone from "./shoppers/Phone";
-import * as serviceWorker from "./serviceWorker";
+import * as React from "react";
+import { Link } from "react-router-dom";
+import { Box, Grommet, Heading } from "grommet";
+import { Home as HomeIcon, Contact } from "grommet-icons";
+import Routes from "./routes/Routes";
+import RoutedButton from "./components/RoutedButton";
 
 const theme = {
   global: {
@@ -36,77 +33,34 @@ const AppBar = (props: any) => (
     align="center"
     justify="between"
     background="brand"
-    pad={{ left: "medium", right: "small", vertical: "small" }}
+    pad={{ left: "medium", right: "medium", vertical: "small" }}
     elevation="medium"
     style={{ zIndex: "1" }}
     {...props}
   />
 );
 
-const routing = (
-  <Grommet theme={theme}>
-    <Box fill>
-      <AppBar>
-        <Button icon={<Home />} onClick={() => {}} />
-        <Heading level="3" margin="none">
-          COVID GROCERIES
-        </Heading>
-        About
-      </AppBar>
-      <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
-        <Box flex align="center" justify="center">
-          <Router>
-            <div>
-              <Route
-                path="/address"
-                component={() => (
-                  <AddressForm next={(p: any) => console.log("next", p)} />
-                )}
-              />
-              <Route
-                path="/bundles"
-                component={Bundles}
-                next={(p: any) => console.log("next", p)}
-              />
-            </div>
-          </Router>
+const App = (): JSX.Element => {
+  return (
+    <Grommet theme={theme}>
+      <Box fill>
+        <AppBar>
+          <RoutedButton icon={<HomeIcon />} path="/" />
+          <Link to="/" style={{ color: "white", textDecoration: "none" }}>
+            <Heading level="3" margin="none">
+              COVID GROCERIES
+            </Heading>
+          </Link>
+          <RoutedButton icon={<Contact />} path="/contact" />
+        </AppBar>
+        <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
+          <Box flex align="center" justify="center">
+            <Routes />
+          </Box>
         </Box>
       </Box>
-    </Box>
-  </Grommet>
-);
+    </Grommet>
+  );
+};
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-// serviceWorker.unregister();
-
-// class App extends React.Component {
-//   componentDidMount() {
-//     console.log("props", this.props);
-//   }
-//   render() {
-//     return (
-//       <Grommet theme={theme}>
-//         <Box fill>
-//           <AppBar>
-//             <Button icon={<Home />} onClick={() => {}} />
-//             <Heading level="3" margin="none">
-//               COVID GROCERIES
-//             </Heading>
-//             About
-//           </AppBar>
-//           <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
-//             <Box flex align="center" justify="center">
-//               <AddressForm next={(p: any) => console.log("next", p)} />
-//               <Bundles />
-//               <Phone />
-//             </Box>
-//           </Box>
-//         </Box>
-//       </Grommet>
-//     );
-//   }
-// }
-
-export default ReactDOM.render(routing, document.getElementById("root"));
+export default App;
