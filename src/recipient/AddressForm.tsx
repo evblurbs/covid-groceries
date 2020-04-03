@@ -6,7 +6,7 @@ import { FormClose } from "grommet-icons";
 import Script from "react-load-script";
 import TextField from "../form/TextField";
 import Navigate from "../form/Navigate";
-import { GOOGLE_API_KEY } from "../utils/constants";
+import { GOOGLE_API_KEY } from "../configs/constants";
 import { StepCallback } from "../interfaces";
 import { screenIds } from "../routes/Recipient";
 

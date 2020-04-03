@@ -10,6 +10,7 @@ import DeliveryNote from "../recipient/DeliveryNote";
 import Bundles from "../recipient/Bundles";
 import Phone from "../recipient/Phone";
 import Confirm from "../recipient/Confirm";
+import { createNewRequest } from "../utils/firestore";
 
 export const screenIds = {
   ADDRESS: "ADDRESS",
@@ -54,6 +55,11 @@ const calculateStep = (
 const Recipient = ({ history }: RouteComponentProps) => {
   const [recipientState, setRecipientState] = useState({});
   const [firstLoad, setFirstLoad] = useState(true);
+  const [isComplete, setIsComplete] = useState(false);
+
+  if (isComplete) {
+    createNewRequest(recipientState);
+  }
 
   const updateState = ({ screenId, inputs }: any) => {
     setRecipientState({
@@ -61,6 +67,7 @@ const Recipient = ({ history }: RouteComponentProps) => {
       [screenId]: inputs,
     });
     history.push(nextPathMap[screenId]);
+    if (screenId === screenIds.PHONE) setIsComplete(true);
   };
 
   const { pathname } = useLocation();
