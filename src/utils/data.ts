@@ -34,6 +34,10 @@ export const normalizeRecipientState = ({
   ...defaultRecipientState,
 });
 
-export const getFormattedPhone = ({
-  PHONE: { phone = "" } = {},
-}: any): string => phone;
+export const getPhone = ({ PHONE: { phone = "" } = {} }: any): string => phone;
+
+export const getLocation = ({
+  ADDRESS: {
+    location: { lat, lng },
+  },
+}) => [lat, lng];

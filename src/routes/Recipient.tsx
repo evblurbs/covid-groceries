@@ -12,7 +12,8 @@ import Phone from "../recipient/Phone";
 import Confirm from "../recipient/Confirm";
 import { createNewRequest } from "../utils/firestore";
 import { confirmOrderReq } from "../utils/functions";
-import { getFormattedPhone } from "../utils/data";
+import { getPhone } from "../utils/data";
+import { saveOrderLocation } from "../utils/database";
 
 export const screenIds = {
   ADDRESS: "ADDRESS",
@@ -147,7 +148,7 @@ const Recipient = ({ history }: RouteComponentProps) => {
         exact
         component={() => (
           <Confirm
-            phone={getFormattedPhone(recipientState)}
+            phone={getPhone(recipientState)}
             confirmOrder={confirmOrder}
             isConfirmed={isConfirmed}
           />

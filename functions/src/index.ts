@@ -20,3 +20,17 @@ const httpsHandler = (method: any) =>
 
 export const confirmOrder = httpsHandler(https.confirmOrder);
 export const smsReply = httpsHandler(https.smsReply);
+
+/*
+ * Firebase Functions: Triggers
+ * All of our trigger functions
+ */
+
+export const textConfirmed = functions.firestore
+  .document("orders/{orderId}")
+  .onUpdate((change, context) => {
+    const newValue = change.after.data();
+    const previousValue = change.before.data();
+    console.log("newValue", newValue);
+    console.log("previousValue", previousValue);
+  });
