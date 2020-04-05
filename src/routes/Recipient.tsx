@@ -11,6 +11,8 @@ import Bundles from "../recipient/Bundles";
 import Phone from "../recipient/Phone";
 import Confirm from "../recipient/Confirm";
 import { createNewRequest } from "../utils/firestore";
+import { confirmOrderReq } from "../utils/functions";
+import { getFormattedPhone } from "../utils/data";
 
 export const screenIds = {
   ADDRESS: "ADDRESS",
@@ -56,11 +58,14 @@ const Recipient = ({ history }: RouteComponentProps) => {
   const [recipientState, setRecipientState] = useState({});
   const [firstLoad, setFirstLoad] = useState(true);
   const [isComplete, setIsComplete] = useState(false);
+  const [isCreated, setIsCreated] = useState(false);
+  const [isConfirmed, setIsConfirmed] = useState(false);
 
-  if (isComplete) {
-    createNewRequest(recipientState);
-  }
-
+  /*
+   * A function to update the state for the recipient
+   * flow. In an attempt to avoid Redux or anything else
+   * more complex, we made our routes a little bloated.
+   */
   const updateState = ({ screenId, inputs }: any) => {
     setRecipientState({
       ...recipientState,
@@ -70,6 +75,12 @@ const Recipient = ({ history }: RouteComponentProps) => {
     if (screenId === screenIds.PHONE) setIsComplete(true);
   };
 
+  /*
+   * We force the user to the next step based on the data.
+   * For example, if a user tries to access the phone screen,
+   * but we have no data, then we push them to the first step
+   * or the address screen.
+   */
   const { pathname } = useLocation();
 
   if (firstLoad) {
@@ -79,6 +90,35 @@ const Recipient = ({ history }: RouteComponentProps) => {
       history.replace(STEPS[step]);
     }
   }
+
+  /*
+   * Callback to set the order is confirmed after the
+   * Firestore listener fires back indicating the user
+   * responded to the text message they received.
+   */
+  const confirmOrder = (confirmed: boolean) => {
+    if (!confirmed) return;
+    setIsConfirmed(confirmed);
+    setRecipientState({
+      ...recipientState,
+      isConfirmed: confirmed,
+    });
+  };
+
+  /*
+   * Upon submitting a phone number, we update
+   * Firestore with the data and send an SMS to confirm.
+   * We need to set a flag (isCreated) to indicate we don't
+   * hit a loop here if the users hits back.
+   */
+  if (isComplete && !isCreated) {
+    // optimistic assumption here
+    createNewRequest(recipientState);
+    confirmOrderReq(recipientState);
+    setIsCreated(true);
+  }
+
+  console.log("state", recipientState);
 
   return (
     <React.Fragment>
@@ -102,7 +142,17 @@ const Recipient = ({ history }: RouteComponentProps) => {
         exact
         component={() => <Phone next={updateState} />}
       />
-      <Route path={PATH_CONFIRM} exact component={() => <Confirm />} />
+      <Route
+        path={PATH_CONFIRM}
+        exact
+        component={() => (
+          <Confirm
+            phone={getFormattedPhone(recipientState)}
+            confirmOrder={confirmOrder}
+            isConfirmed={isConfirmed}
+          />
+        )}
+      />
     </React.Fragment>
   );
 };

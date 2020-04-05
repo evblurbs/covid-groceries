@@ -33,3 +33,7 @@ export const normalizeRecipientState = ({
   phone: formatPhone(phone),
   ...defaultRecipientState,
 });
+
+export const getFormattedPhone = ({
+  PHONE: { phone = "" } = {},
+}: any): string => phone;
