@@ -3,7 +3,7 @@ import {
   Route,
   withRouter,
   RouteComponentProps,
-  useLocation,
+  useLocation
 } from "react-router-dom";
 import AddressForm from "../recipient/AddressForm";
 import DeliveryNote from "../recipient/DeliveryNote";
@@ -19,7 +19,7 @@ export const screenIds = {
   ADDRESS: "ADDRESS",
   DELIVERY: "DELIVERY",
   BUNDLES: "BUNDLES",
-  PHONE: "PHONE",
+  PHONE: "PHONE"
 };
 
 export const PATH_ADDRESS = "/address";
@@ -32,7 +32,7 @@ const nextPathMap = {
   [screenIds.ADDRESS]: PATH_DELIVERY,
   [screenIds.DELIVERY]: PATH_BUNDLES,
   [screenIds.BUNDLES]: PATH_PHONE,
-  [screenIds.PHONE]: PATH_CONFIRM,
+  [screenIds.PHONE]: PATH_CONFIRM
 };
 
 const STEPS = [
@@ -40,7 +40,7 @@ const STEPS = [
   PATH_DELIVERY,
   PATH_BUNDLES,
   PATH_PHONE,
-  PATH_CONFIRM,
+  PATH_CONFIRM
 ];
 
 const calculateStep = (
@@ -70,7 +70,7 @@ const Recipient = ({ history }: RouteComponentProps) => {
   const updateState = ({ screenId, inputs }: any) => {
     setRecipientState({
       ...recipientState,
-      [screenId]: inputs,
+      [screenId]: inputs
     });
     history.push(nextPathMap[screenId]);
     if (screenId === screenIds.PHONE) setIsComplete(true);

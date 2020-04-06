@@ -11,9 +11,9 @@ const theme = {
     font: {
       family: "Roboto",
       size: "18px",
-      height: "20px",
-    },
-  },
+      height: "20px"
+    }
+  }
 };
 
 const AppBar = (props: any) => (
@@ -44,7 +44,12 @@ const App = (): JSX.Element => {
           <RoutedButton icon={<Contact />} path="/contact" />
         </AppBar>
         <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
-          <Box flex align="center" justify="center">
+          <Box
+            flex
+            align="center"
+            justify="center"
+            pad={{ left: "large", right: "large", vertical: "small" }}
+          >
             <Routes />
           </Box>
         </Box>
