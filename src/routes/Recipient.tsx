@@ -116,10 +116,11 @@ const Recipient = ({ history }: RouteComponentProps) => {
     // optimistic assumption here
     createNewRequest(recipientState);
     confirmOrderReq(recipientState);
+    saveOrderLocation(recipientState);
     setIsCreated(true);
   }
 
-  console.log("state", recipientState);
+  console.log("recipient state", recipientState);
 
   return (
     <React.Fragment>

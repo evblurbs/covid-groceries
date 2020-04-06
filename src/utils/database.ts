@@ -8,5 +8,5 @@ const ordersFirebaseRef = realTimeDb.ref("geoFire/orders");
 // @ts-ignore
 const geoFire = new GeoFire(ordersFirebaseRef);
 
-export const saveOrderLocation = (phone: number, location: any) =>
-  geoFire.set(formatPhone(phone), [location.lat, location.lng]);
+export const saveOrderLocation = (state: any) =>
+  geoFire.set(formatPhone(getPhone(state)), getLocation(state));

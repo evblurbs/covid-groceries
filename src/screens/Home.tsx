@@ -6,7 +6,7 @@ function Home() {
   return (
     <Box pad="large">
       <Link to="/address">Recipient</Link>
-      <Link to="/find">Shopper</Link>
+      <Link to="/search">Shopper</Link>
     </Box>
   );
 }
