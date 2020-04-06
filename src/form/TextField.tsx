@@ -1,6 +1,7 @@
 import React from "react";
-import { Box, TextInput, Text } from "grommet";
+import { Box, TextInput } from "grommet";
 import Header from "../components/Header";
+import Description from "../components/Description";
 import "./textField.css";
 
 interface AddressFormProps {
@@ -28,7 +29,7 @@ const AddressForm = ({
           <Header>{label}</Header>
         </label>
       )}
-      {desc && <Text margin={{ bottom: "small" }}>{desc}</Text>}
+      {desc && <Description>{desc}</Description>}
       <TextInput
         placeholder={placeholder}
         value={value}

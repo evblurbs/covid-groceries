@@ -6,18 +6,22 @@ import {
   useLocation,
 } from "react-router-dom";
 import ZipForm from "../shopper/ZipForm";
+import Results from "../shopper/Results";
+import { getZipLocation } from "../utils/data";
 
 export const screenIds = {
   SEARCH: "SEARCH",
+  RESULTS: "RESULTS",
 };
 
 export const PATH_SEARCH = "/search";
+export const PATH_RESULTS = "/results";
 
 const nextPathMap = {
-  [screenIds.SEARCH]: PATH_SEARCH,
+  [screenIds.SEARCH]: PATH_RESULTS,
 };
 
-const STEPS = [PATH_SEARCH];
+const STEPS = [PATH_SEARCH, PATH_RESULTS];
 
 const calculateStep = (pathname, { SEARCH }: any) => {
   let step = 0;
@@ -66,6 +70,13 @@ const Shopper = ({ history }: RouteComponentProps) => {
         path={PATH_SEARCH}
         exact
         component={() => <ZipForm next={updateState} />}
+      />
+      <Route
+        path={PATH_RESULTS}
+        exact
+        component={() => (
+          <Results location={getZipLocation(shopperState)} next={updateState} />
+        )}
       />
     </React.Fragment>
   );

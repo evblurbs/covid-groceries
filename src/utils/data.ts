@@ -41,3 +41,7 @@ export const getLocation = ({
     location: { lat, lng },
   },
 }) => [lat, lng];
+
+export const getZipLocation = ({
+  SEARCH: { location: { lat = 0, lng = 0 } = {} } = {},
+}: any) => [lat, lng];

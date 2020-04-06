@@ -10,3 +10,15 @@ const geoFire = new GeoFire(ordersFirebaseRef);
 
 export const saveOrderLocation = (state: any) =>
   geoFire.set(formatPhone(getPhone(state)), getLocation(state));
+
+export const fetchOrderIDs = (center, callback, radius = 100) => {
+  const query = geoFire.query({ center, radius });
+  const locationKeys: any[] = [];
+  query.on("key_entered", (key, location, distance) => {
+    locationKeys.push({ key, location, distance });
+  });
+  query.on("ready", () => {
+    callback(locationKeys);
+    query.cancel();
+  });
+};

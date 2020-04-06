@@ -12,3 +12,6 @@ export const listenToOrder = (phone, callback) =>
     .collection("orders")
     .doc(formatPhone(phone))
     .onSnapshot((doc) => callback(doc.data()));
+
+export const getOrder = (phone: string) =>
+  db.collection("orders").doc(phone).get();
