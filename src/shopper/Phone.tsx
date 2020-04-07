@@ -3,7 +3,7 @@ import { Box } from "grommet";
 import Navigate from "../form/Navigate";
 import PhoneField from "../form/PhoneField";
 import { StepCallback } from "../interfaces";
-import { screenIds, PATH_BUNDLES } from "../routes/Recipient";
+import { screenIds, PATH_RESULTS } from "../routes/Shopper";
 
 const Phone = ({ back, next, ...rest }: StepCallback) => {
   const [phone, setPhone] = useState("");
@@ -34,7 +34,7 @@ const Phone = ({ back, next, ...rest }: StepCallback) => {
       <Navigate
         disabled={disabled}
         onClick={onSubmit}
-        backPath={PATH_BUNDLES}
+        backPath={PATH_RESULTS}
       />
     </Box>
   );

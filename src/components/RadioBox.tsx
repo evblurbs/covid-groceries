@@ -5,8 +5,8 @@ const RadioBox = ({ checked, hover, Icon, label, description }: any) => {
   const size = React.useContext(ResponsiveContext);
   return (
     <Box
-      pad="large"
-      align="center"
+      pad="medium"
+      align={Icon ? "center" : undefined}
       background={checked ? "brand" : hover ? "light-4" : "light-2"}
       round
       gap="none"
@@ -17,6 +17,7 @@ const RadioBox = ({ checked, hover, Icon, label, description }: any) => {
         level={4}
         margin={{
           bottom: "small",
+          top: Icon ? undefined : "none",
         }}
       >
         {label}

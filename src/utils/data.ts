@@ -6,6 +6,7 @@ import { formatPhone } from "./strings";
 const defaultRecipientState = {
   geoCoded: false,
   textConfirmed: false,
+  shopperConfirmed: false,
   fulfilled: false,
 };
 
@@ -32,6 +33,20 @@ export const normalizeRecipientState = ({
   bundles: [bundle],
   phone: formatPhone(phone),
   ...defaultRecipientState,
+});
+
+interface ShopperState {
+  RESULTS: any;
+  PHONE: any;
+}
+
+export const normalizeShopperState = ({
+  RESULTS: { result },
+  PHONE: { phone },
+}: ShopperState) => ({
+  orderId: result,
+  phone: formatPhone(phone),
+  textConfirmed: false,
 });
 
 export const getPhone = ({ PHONE: { phone = "" } = {} }: any): string => phone;

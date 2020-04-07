@@ -6,10 +6,9 @@ import { listenForSmsConfirm } from "../utils/firestore";
  * Currently distinguishing confirmation message and order fulfilled.
  * We probably want to change these to screens.
  */
-const CONFIRM_TEXT =
-  "Please confirm the text message we sent you to finalize your request.";
+const CONFIRM_TEXT = "Please confirm the text message we sent you to finish.";
 const SUCCESSFUL_ORDER =
-  "Your order has been placed. We will do our best to find someone to fulfill it.";
+  "Thank you for your help! You are all set to go shopping. YOU ARE AWESOME!";
 
 interface MyProps {
   phone: string;
@@ -34,7 +33,8 @@ class Confirm extends React.Component<MyProps, MyState> {
     if (phone.length && !isConfirmed) {
       const unsubscribe = listenForSmsConfirm(
         phone,
-        this.handleConfirmedTextUpdate
+        this.handleConfirmedTextUpdate,
+        true
       );
       this.setState({ unsubscribe });
     }

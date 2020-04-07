@@ -5,7 +5,7 @@ import * as https from "./https";
 const cors = require("cors")({
   origin: "*",
   credentials: true,
-  methods: "POST"
+  methods: "POST",
 });
 
 const httpsHandler = (method: any) =>
@@ -19,6 +19,7 @@ const httpsHandler = (method: any) =>
  */
 
 export const confirmOrder = httpsHandler(https.confirmOrder);
+export const confirmShopper = httpsHandler(https.confirmShopper);
 export const smsReply = httpsHandler(https.smsReply);
 
 /*

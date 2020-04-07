@@ -1,14 +1,11 @@
 import React from "react";
-import { Box, RadioButtonGroup, ResponsiveContext } from "grommet";
-import Header from "../components/Header";
-import Description from "../components/Description";
 import RadioBox from "../components/RadioBox";
 import { getOrder } from "../utils/firestore";
 
 interface MyProps {
   location: number[];
   distance: number;
-  phone: string;
+  value: string;
   checked: boolean;
   hover: boolean;
 }
@@ -28,7 +25,7 @@ class Result extends React.Component<MyProps, MyState> {
     };
   }
   componentDidMount() {
-    getOrder(this.props.phone).then((res) =>
+    getOrder(this.props.value).then((res) =>
       this.setState({
         orderData: res.data(),
       })
@@ -37,8 +34,6 @@ class Result extends React.Component<MyProps, MyState> {
   componentWillUnmount() {}
   componentDidUpdate() {}
   render() {
-    console.log("result props", this.props);
-    console.log("result state", this.state);
     const { orderData } = this.state;
     return (
       <RadioBox
