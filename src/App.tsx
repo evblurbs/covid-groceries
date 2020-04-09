@@ -11,9 +11,9 @@ const theme = {
     font: {
       family: "Roboto",
       size: "18px",
-      height: "20px"
-    }
-  }
+      height: "20px",
+    },
+  },
 };
 
 const AppBar = (props: any) => (
@@ -38,7 +38,7 @@ const App = (): JSX.Element => {
           <RoutedButton icon={<HomeIcon />} path="/" />
           <Link to="/" style={{ color: "white", textDecoration: "none" }}>
             <Heading level="3" margin="none">
-              COVID GROCERIES
+              GROCERY PALS
             </Heading>
           </Link>
           <RoutedButton icon={<Contact />} path="/contact" />
