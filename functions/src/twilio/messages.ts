@@ -9,3 +9,17 @@ export const confirmShopperMessage =
 
 export const shopperConfirmedMessage =
   "Your phone number has been confirmed. When you have delivered the order, please respond DONE to notify the recipient. Feel free to add a message to after DONE to tell the recipient about where their groceries are. THANKS AGAIN FOR BEING AWESOME!";
+
+const deliveryOrderPrefix =
+  "Great news! Your grocery order has been delivered! Please check your doorstep or where you instructed the volunteer to drop off your groceries.";
+
+export const confirmDeliveryOrder = (note: string) =>
+  note.length > 4
+    ? `${deliveryOrderPrefix} Note from your shopper: ${note.slice(
+        4,
+        note.length
+      )}`
+    : deliveryOrderPrefix;
+
+export const confirmDeliveryShopper =
+  "THANK YOU! You are not only helping someone that is at high risk of becoming ill, but also lowering the exposure for yourself and others shopping at the same time.";

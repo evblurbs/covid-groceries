@@ -12,13 +12,14 @@ const SUCCESSFUL_ORDER =
   "Your order has been placed. We will do our best to find someone to fulfill it.";
 
 interface MyProps {
-  phone: string;
+  orderId: string | undefined;
   confirmOrder: (confirmed: boolean) => any;
   isConfirmed: boolean;
 }
 
 interface MyState {
   unsubscribe: () => any;
+  subscribing: boolean;
 }
 
 class Confirm extends React.Component<MyProps, MyState> {
@@ -27,33 +28,28 @@ class Confirm extends React.Component<MyProps, MyState> {
 
     this.state = {
       unsubscribe: () => false,
+      subscribing: false,
     };
   }
   componentDidMount() {
-    const { phone, isConfirmed } = this.props;
-    if (phone.length && !isConfirmed) {
-      const unsubscribe = listenForSmsConfirm(
-        phone,
-        this.handleConfirmedTextUpdate
-      );
-      this.setState({ unsubscribe });
-    }
+    const { orderId } = this.props;
+    const unsubscribe = listenForSmsConfirm(
+      orderId,
+      this.handleConfirmedTextUpdate
+    );
+    this.setState({
+      unsubscribe,
+    });
   }
   componentWillUnmount() {
     const { unsubscribe } = this.state;
     unsubscribe();
   }
-  componentDidUpdate() {
-    const { isConfirmed } = this.props;
-    isConfirmed && this.state.unsubscribe();
-  }
-  shouldComponentUpdate(nextProps) {
-    return false;
-  }
   handleConfirmedTextUpdate = ({ textConfirmed = false } = {}) => {
-    if (!textConfirmed) return;
+    const { isConfirmed } = this.props;
+    if (!textConfirmed || isConfirmed) return;
     const { unsubscribe } = this.state;
-    return this.props.confirmOrder(textConfirmed) && unsubscribe();
+    this.props.confirmOrder(textConfirmed) && unsubscribe();
   };
   render() {
     const { isConfirmed } = this.props;

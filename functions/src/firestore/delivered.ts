@@ -1,6 +1,6 @@
 import db from "./db";
 
-const shopperConfirmed = (phone: string) =>
+const delivered = (phone: string) =>
   db
     .collection("shoppers")
     .doc(phone)
@@ -13,15 +13,12 @@ const shopperConfirmed = (phone: string) =>
       const batch = db.batch();
 
       const shopperRef = db.collection("shoppers").doc(phone);
-      batch.update(shopperRef, { textConfirmed: true });
+      batch.delete(shopperRef);
 
       const orderRef = db.collection("orders").doc(data.orderId);
-      batch.update(orderRef, { shopperConfirmed: true });
+      batch.update(orderRef, { fulfilled: true });
 
-      const orderLookupRef = db.collection("orderLookup").doc(data.orderId);
-      batch.update(orderLookupRef, { shopper: phone });
-
-      return batch.commit();
+      return batch.commit().then(() => data.orderId);
     });
 
-export default shopperConfirmed;
+export default delivered;

@@ -3,7 +3,7 @@ import {
   Route,
   withRouter,
   RouteComponentProps,
-  useLocation
+  useLocation,
 } from "react-router-dom";
 import AddressForm from "../recipient/AddressForm";
 import DeliveryNote from "../recipient/DeliveryNote";
@@ -19,7 +19,7 @@ export const screenIds = {
   ADDRESS: "ADDRESS",
   DELIVERY: "DELIVERY",
   BUNDLES: "BUNDLES",
-  PHONE: "PHONE"
+  PHONE: "PHONE",
 };
 
 export const PATH_ADDRESS = "/address";
@@ -32,7 +32,7 @@ const nextPathMap = {
   [screenIds.ADDRESS]: PATH_DELIVERY,
   [screenIds.DELIVERY]: PATH_BUNDLES,
   [screenIds.BUNDLES]: PATH_PHONE,
-  [screenIds.PHONE]: PATH_CONFIRM
+  [screenIds.PHONE]: PATH_CONFIRM,
 };
 
 const STEPS = [
@@ -40,7 +40,7 @@ const STEPS = [
   PATH_DELIVERY,
   PATH_BUNDLES,
   PATH_PHONE,
-  PATH_CONFIRM
+  PATH_CONFIRM,
 ];
 
 const calculateStep = (
@@ -61,6 +61,7 @@ const Recipient = ({ history }: RouteComponentProps) => {
   const [isComplete, setIsComplete] = useState(false);
   const [isCreated, setIsCreated] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
+  const [orderId, setOrderId] = useState("");
 
   /*
    * A function to update the state for the recipient
@@ -70,7 +71,7 @@ const Recipient = ({ history }: RouteComponentProps) => {
   const updateState = ({ screenId, inputs }: any) => {
     setRecipientState({
       ...recipientState,
-      [screenId]: inputs
+      [screenId]: inputs,
     });
     history.push(nextPathMap[screenId]);
     if (screenId === screenIds.PHONE) setIsComplete(true);
@@ -114,9 +115,11 @@ const Recipient = ({ history }: RouteComponentProps) => {
    */
   if (isComplete && !isCreated) {
     // optimistic assumption here
-    createNewRequest(recipientState);
+    createNewRequest(recipientState).then((id) => {
+      saveOrderLocation(id, recipientState);
+      setOrderId(id);
+    });
     confirmOrderReq(recipientState);
-    saveOrderLocation(recipientState);
     setIsCreated(true);
   }
 
@@ -147,13 +150,16 @@ const Recipient = ({ history }: RouteComponentProps) => {
       <Route
         path={PATH_CONFIRM}
         exact
-        component={() => (
-          <Confirm
-            phone={getPhone(recipientState)}
-            confirmOrder={confirmOrder}
-            isConfirmed={isConfirmed}
-          />
-        )}
+        component={(props) =>
+          orderId ? (
+            <Confirm
+              orderId={orderId}
+              confirmOrder={confirmOrder}
+              isConfirmed={isConfirmed}
+              {...props}
+            />
+          ) : null
+        }
       />
     </React.Fragment>
   );

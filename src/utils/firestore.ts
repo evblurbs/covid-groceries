@@ -3,14 +3,27 @@ import { normalizeRecipientState, normalizeShopperState } from "./data";
 import { formatPhone } from "./strings";
 
 export const createNewRequest = (state) => {
-  const data = normalizeRecipientState(state);
-  return db.collection("orders").doc(data.phone).set(data);
+  const { phone, ...data } = normalizeRecipientState(state);
+  return db
+    .collection("orders")
+    .add(data)
+    .then(({ id }) => {
+      const batch = db.batch();
+
+      const orderRef = db.collection("orderLookup").doc(id);
+      batch.set(orderRef, { phone });
+
+      const phoneRef = db.collection("phoneLookup").doc(phone);
+      batch.set(phoneRef, { id });
+
+      return batch.commit().then(() => id);
+    });
 };
 
-export const listenForSmsConfirm = (phone, callback, isShopper = false) =>
+export const listenForSmsConfirm = (id, callback) =>
   db
-    .collection(isShopper ? "shoppers" : "orders")
-    .doc(formatPhone(phone))
+    .collection("orders")
+    .doc(id)
     .onSnapshot((doc) => callback(doc.data()));
 
 export const getOrder = (phone: string) =>

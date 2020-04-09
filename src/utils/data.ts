@@ -51,6 +51,9 @@ export const normalizeShopperState = ({
 
 export const getPhone = ({ PHONE: { phone = "" } = {} }: any): string => phone;
 
+export const getOrderId = ({ RESULTS: { result = "" } = {} }: any): string =>
+  result;
+
 export const getLocation = ({
   ADDRESS: {
     location: { lat, lng },

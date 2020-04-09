@@ -11,7 +11,7 @@ const SUCCESSFUL_ORDER =
   "Thank you for your help! You are all set to go shopping. YOU ARE AWESOME!";
 
 interface MyProps {
-  phone: string;
+  orderId: string;
   confirmOrder: (confirmed: boolean) => any;
   isConfirmed: boolean;
 }
@@ -29,12 +29,11 @@ class Confirm extends React.Component<MyProps, MyState> {
     };
   }
   componentDidMount() {
-    const { phone, isConfirmed } = this.props;
-    if (phone.length && !isConfirmed) {
+    const { orderId, isConfirmed } = this.props;
+    if (orderId.length && !isConfirmed) {
       const unsubscribe = listenForSmsConfirm(
-        phone,
-        this.handleConfirmedTextUpdate,
-        true
+        orderId,
+        this.handleConfirmedTextUpdate
       );
       this.setState({ unsubscribe });
     }
@@ -43,17 +42,11 @@ class Confirm extends React.Component<MyProps, MyState> {
     const { unsubscribe } = this.state;
     unsubscribe();
   }
-  componentDidUpdate() {
+  handleConfirmedTextUpdate = ({ shopperConfirmed = false } = {}) => {
     const { isConfirmed } = this.props;
-    isConfirmed && this.state.unsubscribe();
-  }
-  shouldComponentUpdate(nextProps) {
-    return false;
-  }
-  handleConfirmedTextUpdate = ({ textConfirmed = false } = {}) => {
-    if (!textConfirmed) return;
+    if (!shopperConfirmed || isConfirmed) return;
     const { unsubscribe } = this.state;
-    return this.props.confirmOrder(textConfirmed) && unsubscribe();
+    return this.props.confirmOrder(shopperConfirmed) && unsubscribe();
   };
   render() {
     const { isConfirmed } = this.props;

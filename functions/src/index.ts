@@ -1,5 +1,6 @@
 import * as functions from "firebase-functions";
 import * as https from "./https";
+import removeGeofire from "./database/removeGeofire";
 
 // TODO: Secure?
 const cors = require("cors")({
@@ -31,7 +32,15 @@ export const textConfirmed = functions.firestore
   .document("orders/{orderId}")
   .onUpdate((change, context) => {
     const newValue = change.after.data();
-    const previousValue = change.before.data();
-    console.log("newValue", newValue);
-    console.log("previousValue", previousValue);
+    const prevValue = change.before.data();
+    if (
+      prevValue &&
+      !prevValue.shopperConfirmed &&
+      newValue &&
+      newValue.shopperConfirmed
+    ) {
+      return removeGeofire(context.params.orderId);
+    } else {
+      return false;
+    }
   });

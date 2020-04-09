@@ -5,7 +5,7 @@ import {
   RouteComponentProps,
   useLocation,
 } from "react-router-dom";
-import { getZipLocation, getPhone } from "../utils/data";
+import { getZipLocation, getOrderId } from "../utils/data";
 import { createNewShopper } from "../utils/firestore";
 import { confirmShopperReq } from "../utils/functions";
 import ZipForm from "../shopper/ZipForm";
@@ -130,7 +130,7 @@ const Shopper = ({ history }: RouteComponentProps) => {
         exact
         component={() => (
           <Confirm
-            phone={getPhone(shopperState)}
+            orderId={getOrderId(shopperState)}
             confirmOrder={confirmOrder}
             isConfirmed={isConfirmed}
           />
