@@ -4,13 +4,13 @@ import {
   RadioButtonGroup,
   Text,
   Heading,
-  ResponsiveContext
+  ResponsiveContext,
 } from "grommet";
 import { Restroom, Favorite, Cafeteria } from "grommet-icons";
 import Navigate from "../form/Navigate";
 import Header from "../components/Header";
 import Description from "../components/Description";
-import { screenIds, PATH_DELIVERY } from "../routes/Recipient";
+import { screenIds } from "../routes/Recipient";
 import { StepCallback } from "../interfaces";
 
 const Bundles = ({ next }: StepCallback) => {
@@ -23,40 +23,40 @@ const Bundles = ({ next }: StepCallback) => {
       value: "toiletries",
       icon: Restroom,
       description:
-        "If you need household essentials your Grocery Pal will deliever items such as soap, cleaning products and even toilet paper."
+        "If you need household essentials your Grocery Pal will deliever items such as soap, cleaning products and even toilet paper.",
     },
     {
       label: "Food",
       value: "food",
       icon: Cafeteria,
       description:
-        "If your pantry is getting bare your Grocery Pal will focus on purchasing canned soups, frozen meals and fresh vegetables."
+        "If your pantry is getting bare your Grocery Pal will focus on purchasing canned soups, frozen meals and fresh vegetables.",
     },
     {
       label: "Food + Toiletries",
       value: "bundle",
       icon: Favorite,
       description:
-        "Can't decide? Your Grocery Pal will do their best to provide you with a few household items as well as groceries."
-    }
+        "Can't decide? Your Grocery Pal will do their best to provide you with a few household items as well as groceries.",
+    },
   ];
   const onSubmit = () =>
     next({
       screenId: screenIds.BUNDLES,
-      inputs: { bundle }
+      inputs: { bundle },
     });
   return (
     <Box
       width="large"
       height={{
-        min: "unset"
+        min: "unset",
       }}
     >
       <fieldset style={{ border: "none", padding: 0 }}>
         <legend>
           <Header
             margin={{
-              bottom: "large"
+              bottom: "large",
             }}
           >
             Bundles
@@ -70,22 +70,22 @@ const Bundles = ({ next }: StepCallback) => {
           direction={size === "small" ? "column" : "row"}
           gap="none"
           margin={{
-            top: "medium"
+            top: "medium",
           }}
           height={{
-            min: "unset"
+            min: "unset",
           }}
           options={bundlesData.map((bundle, index) => {
             return {
               label: bundle.label,
               value: bundle.value,
               name: "bundle",
-              index: index
+              index: index,
             };
           })}
           value={bundle}
           wrap={true}
-          onChange={event => {
+          onChange={(event) => {
             setBundle(event.target.value);
             setDisabled(false);
           }}
@@ -115,14 +115,14 @@ const Bundles = ({ next }: StepCallback) => {
                     option.index % 2 === 0 &&
                     option.index !== bundlesData.length - 1
                       ? "medium"
-                      : "none"
+                      : "none",
                 }}
               >
                 <Icon size="large" />
                 <Heading
                   level={4}
                   margin={{
-                    bottom: "small"
+                    bottom: "small",
                   }}
                 >
                   {option.label}
@@ -134,11 +134,7 @@ const Bundles = ({ next }: StepCallback) => {
         </RadioButtonGroup>
       </fieldset>
 
-      <Navigate
-        disabled={disabled}
-        onClick={onSubmit}
-        backPath={PATH_DELIVERY}
-      />
+      <Navigate disabled={disabled} onClick={onSubmit} backPath="/" />
     </Box>
   );
 };

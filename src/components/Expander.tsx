@@ -1,23 +1,33 @@
 import React from "react";
-import { Box, Button, Text, Collapsible, Paragraph } from "grommet";
+import {
+  Box,
+  Button,
+  Text,
+  Collapsible,
+  Paragraph,
+  ResponsiveContext,
+} from "grommet";
 import { FormDown, FormNext } from "grommet-icons";
-
-const MenuButton = ({ label, open, ...rest }) => {
-  const Icon = open ? FormDown : FormNext;
-  return (
-    <Button hoverIndicator="background" {...rest}>
-      <Box direction="row" align="center" pad="xsmall">
-        <Icon color="brand" size="large" />
-        <Text size="xlarge" color="dark-1">
-          {label}
-        </Text>
-      </Box>
-    </Button>
-  );
-};
 
 const Expander = ({ startOpen = false, title, description }) => {
   const [openMenu, setOpenMenu] = React.useState(startOpen);
+
+  const size = React.useContext(ResponsiveContext);
+  const isSmall = size === "small";
+
+  const MenuButton = ({ label, open, ...rest }) => {
+    const Icon = open ? FormDown : FormNext;
+    return (
+      <Button hoverIndicator="background" {...rest}>
+        <Box direction="row" align="center" pad="xsmall">
+          <Icon color="brand" size={isSmall ? "medium" : "large"} />
+          <Text size={isSmall ? "medium" : "xlarge"} color="dark-1">
+            {label}
+          </Text>
+        </Box>
+      </Button>
+    );
+  };
 
   return (
     <Box width="small" fill={true}>
@@ -31,11 +41,11 @@ const Expander = ({ startOpen = false, title, description }) => {
       />
       <Collapsible open={openMenu}>
         <Paragraph
-          size="large"
+          size={isSmall ? "medium" : "large"}
           margin={{
-            left: "large",
-            top: "medium",
-            right: "medium",
+            left: isSmall ? "medium" : "large",
+            top: isSmall ? "small" : "medium",
+            right: isSmall ? "small" : "medium",
             bottom: "medium",
           }}
           color="dark-2"

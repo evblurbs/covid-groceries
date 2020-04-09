@@ -8,7 +8,7 @@ import TextField from "../form/TextField";
 import Navigate from "../form/Navigate";
 import { GOOGLE_API_KEY } from "../configs/constants";
 import { StepCallback } from "../interfaces";
-import { screenIds } from "../routes/Recipient";
+import { screenIds, PATH_BUNDLES } from "../routes/Recipient";
 
 let autocomplete: any = null;
 
@@ -89,7 +89,11 @@ const AddressForm = ({ next }: StepCallback) => {
         label="Address"
         desc="Enter an address where you would like to get groceries delivered to."
       />
-      <Navigate disabled={disabled} onClick={onSubmit} backPath="/" />
+      <Navigate
+        disabled={disabled}
+        onClick={onSubmit}
+        backPath={PATH_BUNDLES}
+      />
     </Box>
   );
 };
