@@ -62,7 +62,7 @@ const Bundles = ({ next }: StepCallback) => {
             Bundles
           </Header>
         </legend>
-        <Description>Select an option that best fits your needs</Description>}
+        <Description>Select an option that best fits your needs</Description>
         <RadioButtonGroup
           name="bundle"
           justify="center"

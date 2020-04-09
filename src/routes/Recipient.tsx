@@ -3,7 +3,7 @@ import {
   Route,
   withRouter,
   RouteComponentProps,
-  useLocation,
+  useLocation
 } from "react-router-dom";
 import AddressForm from "../recipient/AddressForm";
 import DeliveryNote from "../recipient/DeliveryNote";
@@ -19,7 +19,7 @@ export const screenIds = {
   ADDRESS: "ADDRESS",
   DELIVERY: "DELIVERY",
   BUNDLES: "BUNDLES",
-  PHONE: "PHONE",
+  PHONE: "PHONE"
 };
 
 export const PATH_ADDRESS = "/address";
@@ -30,27 +30,27 @@ const PATH_CONFIRM = "/confirm";
 
 const nextPathMap = {
   [screenIds.ADDRESS]: PATH_DELIVERY,
-  [screenIds.DELIVERY]: PATH_BUNDLES,
-  [screenIds.BUNDLES]: PATH_PHONE,
-  [screenIds.PHONE]: PATH_CONFIRM,
+  [screenIds.DELIVERY]: PATH_PHONE,
+  [screenIds.BUNDLES]: PATH_ADDRESS,
+  [screenIds.PHONE]: PATH_CONFIRM
 };
 
 const STEPS = [
+  PATH_BUNDLES,
   PATH_ADDRESS,
   PATH_DELIVERY,
-  PATH_BUNDLES,
   PATH_PHONE,
-  PATH_CONFIRM,
+  PATH_CONFIRM
 ];
 
 const calculateStep = (
   pathname,
-  { ADDRESS, DELIVERY, BUNDLES, PHONE }: any
+  { BUNDLES, ADDRESS, DELIVERY, PHONE }: any
 ) => {
   let step = 0;
-  if (ADDRESS) step = 1;
-  if (DELIVERY) step = 2;
-  if (BUNDLES) step = 3;
+  if (BUNDLES) step = 1;
+  if (ADDRESS) step = 2;
+  if (DELIVERY) step = 3;
   if (PHONE) step = 4;
   return step;
 };
@@ -71,7 +71,7 @@ const Recipient = ({ history }: RouteComponentProps) => {
   const updateState = ({ screenId, inputs }: any) => {
     setRecipientState({
       ...recipientState,
-      [screenId]: inputs,
+      [screenId]: inputs
     });
     history.push(nextPathMap[screenId]);
     if (screenId === screenIds.PHONE) setIsComplete(true);
@@ -103,7 +103,7 @@ const Recipient = ({ history }: RouteComponentProps) => {
     setIsConfirmed(confirmed);
     setRecipientState({
       ...recipientState,
-      isConfirmed: confirmed,
+      isConfirmed: confirmed
     });
   };
 
@@ -115,7 +115,7 @@ const Recipient = ({ history }: RouteComponentProps) => {
    */
   if (isComplete && !isCreated) {
     // optimistic assumption here
-    createNewRequest(recipientState).then((id) => {
+    createNewRequest(recipientState).then(id => {
       saveOrderLocation(id, recipientState);
       setOrderId(id);
     });
@@ -150,7 +150,7 @@ const Recipient = ({ history }: RouteComponentProps) => {
       <Route
         path={PATH_CONFIRM}
         exact
-        component={(props) =>
+        component={props =>
           orderId ? (
             <Confirm
               orderId={orderId}

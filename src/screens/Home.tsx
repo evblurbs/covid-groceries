@@ -6,7 +6,7 @@ import {
   Paragraph,
   ResponsiveContext,
   Carousel,
-  Collapsible,
+  Collapsible
 } from "grommet";
 import RoutedButton from "../components/RoutedButton";
 import { MapLocation, Basket, Chat, Search, Cart, Car } from "grommet-icons";
@@ -23,7 +23,7 @@ function Home() {
       <Grid
         columns={{
           count: size === "small" ? 1 : 2,
-          size: "auto",
+          size: "auto"
         }}
         gap="small"
       >
@@ -36,7 +36,7 @@ function Home() {
             some items you need to hold you off.
           </Paragraph>
           <RoutedButton
-            path="/address"
+            path="/bundles"
             primary
             size="medium"
             label="Request groceries"
@@ -69,7 +69,7 @@ function Home() {
             top: "none",
             left: "xlarge",
             right: "xlarge",
-            bottom: "xlarge",
+            bottom: "xlarge"
           }}
           background="accent-1"
         >
@@ -90,7 +90,7 @@ function Home() {
             top: "none",
             left: "xlarge",
             right: "xlarge",
-            bottom: "xlarge",
+            bottom: "xlarge"
           }}
           background="accent-2"
         >
@@ -111,7 +111,7 @@ function Home() {
             top: "none",
             left: "xlarge",
             right: "xlarge",
-            bottom: "xlarge",
+            bottom: "xlarge"
           }}
           background="accent-3"
         >
@@ -131,7 +131,7 @@ function Home() {
             top: "none",
             left: "xlarge",
             right: "xlarge",
-            bottom: "xlarge",
+            bottom: "xlarge"
           }}
           background="accent-4"
         >
@@ -151,7 +151,7 @@ function Home() {
             top: "none",
             left: "xlarge",
             right: "xlarge",
-            bottom: "xlarge",
+            bottom: "xlarge"
           }}
           background="accent-1"
         >
@@ -172,7 +172,7 @@ function Home() {
             top: "none",
             left: "xlarge",
             right: "xlarge",
-            bottom: "xlarge",
+            bottom: "xlarge"
           }}
           background="accent-2"
         >
@@ -193,7 +193,7 @@ function Home() {
             top: "none",
             left: "xlarge",
             right: "xlarge",
-            bottom: "xlarge",
+            bottom: "xlarge"
           }}
           background="accent-3"
         >
