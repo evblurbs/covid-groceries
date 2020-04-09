@@ -1,6 +1,7 @@
 import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/database";
+import "firebase/analytics";
 import { FIREBASE_API_KEY } from "./constants";
 
 const firebaseConfig = {
@@ -15,6 +16,8 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
+firebase.analytics();
 
 export const db = firebase.firestore();
 export const realTimeDb = firebase.database();
