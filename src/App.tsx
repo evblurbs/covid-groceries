@@ -48,7 +48,13 @@ const App = (): JSX.Element => {
             flex
             align="center"
             justify="center"
-            pad={{ left: "large", right: "large", vertical: "small" }}
+            pad={{
+              left: "large",
+              right: "large",
+              vertical: "small",
+              bottom: "xlarge",
+            }}
+            style={{ maxWidth: 1200, width: "100%", margin: "0 auto" }}
           >
             <Routes />
           </Box>

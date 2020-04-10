@@ -5,12 +5,15 @@ const RadioBox = ({ checked, hover, Icon, label, description }: any) => {
   const size = React.useContext(ResponsiveContext);
   return (
     <Box
-      pad="medium"
+      pad={size === "medium" ? "medium" : "large"}
       align={Icon ? "center" : undefined}
       background={checked ? "brand" : hover ? "light-4" : "light-2"}
       round
       gap="none"
-      width={size === "small" ? "100%" : "320px"}
+      height={size === "small" ? undefined : "small"}
+      justify="center"
+      animation="fadeIn"
+      margin={{ bottom: "small", right: "small" }}
     >
       {Icon && <Icon size="large" />}
       <Heading

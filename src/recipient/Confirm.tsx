@@ -1,27 +1,20 @@
 import React from "react";
 import { Box } from "grommet";
+import ConfirmText from "../components/ConfirmText";
+import ConfirmedText from "../components/ConfirmedText";
 import { listenForSmsConfirm } from "../utils/firestore";
-
-/*
- * Currently distinguishing confirmation message and order fulfilled.
- * We probably want to change these to screens.
- */
-const CONFIRM_TEXT =
-  "Please confirm the text message we sent you to finalize your request.";
-const SUCCESSFUL_ORDER =
-  "Your order has been placed. We will do our best to find someone to fulfill it.";
 
 interface MyProps {
   orderId: string | undefined;
   confirmOrder: (confirmed: boolean) => any;
   isConfirmed: boolean;
+  phone: string;
 }
 
 interface MyState {
   unsubscribe: () => any;
   subscribing: boolean;
 }
-
 class Confirm extends React.Component<MyProps, MyState> {
   constructor(props) {
     super(props);
@@ -52,10 +45,10 @@ class Confirm extends React.Component<MyProps, MyState> {
     this.props.confirmOrder(textConfirmed) && unsubscribe();
   };
   render() {
-    const { isConfirmed } = this.props;
+    const { isConfirmed, phone } = this.props;
     return (
       <Box width="large" pad="large">
-        {isConfirmed ? SUCCESSFUL_ORDER : CONFIRM_TEXT}
+        {isConfirmed ? <ConfirmedText /> : <ConfirmText phone={phone} />}
       </Box>
     );
   }

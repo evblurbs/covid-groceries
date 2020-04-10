@@ -15,6 +15,30 @@ interface MyState {
   orderData?: any;
 }
 
+const ResultDescription = ({ bundle }) => {
+  if (bundle === "food") {
+    return (
+      <span>
+        <b>Food:</b> Items such as canned soup, frozen meals, and fresh
+        vegetables.
+      </span>
+    );
+  }
+  if (bundle === "toiletries") {
+    return (
+      <span>
+        <b>Toiletries:</b> Items such as toilet paper, soap, and cleaning
+        products.
+      </span>
+    );
+  }
+  return (
+    <span>
+      <b>Mixed:</b> Items such as toilet paper, canned soup, and frozen meals.
+    </span>
+  );
+};
+
 class Result extends React.Component<MyProps, MyState> {
   constructor(props) {
     super(props);
@@ -35,17 +59,13 @@ class Result extends React.Component<MyProps, MyState> {
   componentDidUpdate() {}
   render() {
     const { orderData } = this.state;
-    return (
+    return orderData.bundle ? (
       <RadioBox
         {...this.props}
         label={orderData.formattedAddress}
-        description={
-          orderData && orderData.bundles
-            ? `${orderData.bundles[0]}: blah blah blah`
-            : undefined
-        }
+        description={<ResultDescription bundle={orderData.bundle} />}
       />
-    );
+    ) : null;
   }
 }
 

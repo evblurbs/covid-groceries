@@ -1,4 +1,4 @@
-import { db } from "../configs/firebase";
+import { db, FieldValue } from "../configs/firebase";
 import { normalizeRecipientState, normalizeShopperState } from "./data";
 import { formatPhone } from "./strings";
 
@@ -6,7 +6,7 @@ export const createNewRequest = (state) => {
   const { phone, ...data } = normalizeRecipientState(state);
   return db
     .collection("orders")
-    .add(data)
+    .add({ ...data, created: FieldValue.serverTimestamp() })
     .then(({ id }) => {
       const batch = db.batch();
 

@@ -30,7 +30,7 @@ export const normalizeRecipientState = ({
   lng,
   formattedAddress: formatted_address,
   deliveryNote,
-  bundles: [bundle],
+  bundle,
   phone: formatPhone(phone),
   ...defaultRecipientState,
 });

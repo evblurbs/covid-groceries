@@ -29,7 +29,7 @@ const Phone = ({ back, next, ...rest }: StepCallback) => {
       <PhoneField
         onChange={onChange}
         value={phone}
-        desc="Enter your phone number. We will send a text message to let you know if your order is picked up."
+        desc="Enter your phone number. We will send you a text message to confirm your number. Later, reply to that message to notify the recipient of your contactless delivery."
       />
       <Navigate
         disabled={disabled}

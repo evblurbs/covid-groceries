@@ -30,7 +30,11 @@ const Expander = ({ startOpen = false, title, description }) => {
   };
 
   return (
-    <Box width="small" fill={true}>
+    <Box
+      width="small"
+      fill={true}
+      margin={{ bottom: isSmall ? "small" : undefined }}
+    >
       <MenuButton
         open={openMenu}
         label={title}
@@ -46,7 +50,7 @@ const Expander = ({ startOpen = false, title, description }) => {
             left: isSmall ? "medium" : "large",
             top: isSmall ? "small" : "medium",
             right: isSmall ? "small" : "medium",
-            bottom: "medium",
+            bottom: isSmall ? undefined : "medium",
           }}
           color="dark-2"
           fill

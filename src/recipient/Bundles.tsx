@@ -47,10 +47,11 @@ const Bundles = ({ next }: StepCallback) => {
     });
   return (
     <Box
-      width="large"
+      width="xlarge"
       height={{
         min: "unset",
       }}
+      style={{ maxWidth: 1012, width: "100%" }}
     >
       <fieldset style={{ border: "none", padding: 0 }}>
         <legend>
@@ -62,7 +63,10 @@ const Bundles = ({ next }: StepCallback) => {
             Bundles
           </Header>
         </legend>
-        <Description>Select an option that best fits your needs</Description>
+        <Description>
+          Select an option that best fits your needs. We try to make it simple
+          for volunteers to grab items for you.
+        </Description>
         <RadioButtonGroup
           name="bundle"
           justify="center"
@@ -111,11 +115,7 @@ const Bundles = ({ next }: StepCallback) => {
                 width={size === "small" ? "100%" : "320px"}
                 margin={{
                   bottom: size === "small" ? "large" : "medium",
-                  right:
-                    option.index % 2 === 0 &&
-                    option.index !== bundlesData.length - 1
-                      ? "medium"
-                      : "none",
+                  right: option.index === 2 ? "none" : "medium",
                 }}
               >
                 <Icon size="large" />

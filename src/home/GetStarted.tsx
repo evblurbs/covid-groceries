@@ -14,11 +14,11 @@ const GetStarted = () => {
     >
       <Box background="dark-2" pad="medium">
         <Heading level={3} size="small" margin="none">
-          Recipients (high risk)
+          Recipient (high risk)
         </Heading>
         <Paragraph size="large" margin={{ top: "small", bottom: "medium" }}>
-          Afraid to goto the grocery store? See if we can have someone get some
-          items you need to hold you off.
+          Afraid to goto the grocery store? See if we can find someone to drop
+          off some donated items to hold you over (est. delivery time in days).
         </Paragraph>
         <RoutedButton
           path="/bundles"
@@ -30,17 +30,17 @@ const GetStarted = () => {
       </Box>
       <Box background="dark-3" pad="medium">
         <Heading level={3} size="small" margin="none">
-          Shoppers (healthy)
+          Grocery Pal (healthy)
         </Heading>
         <Paragraph size="large" margin={{ top: "small", bottom: "medium" }}>
-          Pick up $15-25 worth of goods and deliver it to a high risk person and
-          reduce exposure/traffic at the grocery store.
+          Pick up $15-$25 worth of groceries to donate and deliver to a high
+          risk person while reducing exposure at the grocery store.
         </Paragraph>
         <RoutedButton
           path="/search"
           primary
           size="medium"
-          label="Find someone to help"
+          label="Help someone"
           margin={{ bottom: size === "small" ? "small" : "none" }}
         />
       </Box>

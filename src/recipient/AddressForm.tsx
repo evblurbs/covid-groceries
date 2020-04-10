@@ -19,9 +19,10 @@ const AddressForm = ({ next }: StepCallback) => {
 
   const handlePlaceSelect = () => {
     const {
-      geometry: { location },
+      geometry: { location = undefined } = {},
       formatted_address,
     } = autocomplete.getPlace();
+    if (!location) return;
     const lat = location.lat();
     const lng = location.lng();
     setDisabled(false);
@@ -87,7 +88,7 @@ const AddressForm = ({ next }: StepCallback) => {
         reverse
         name="address"
         label="Address"
-        desc="Enter an address where you would like to get groceries delivered to."
+        desc="Enter an address where you would like to get groceries delivered to. Make sure to select an option from the drop down."
       />
       <Navigate
         disabled={disabled}

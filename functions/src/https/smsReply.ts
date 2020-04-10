@@ -23,7 +23,7 @@ const smsReply = (request: any, response: any): any => {
   }
 
   // Shopper confirmations
-  if (text === "I ROCK") {
+  if (text === "PAL") {
     return shopperConfirmed(From)
       .then(() => sendSMS(From, shopperConfirmedMessage))
       .then(() => response.status(200).send({ sent: true }))

@@ -1,0 +1,4 @@
+.results label,
+.results label > div {
+  width: 100%;
+}

@@ -3,7 +3,7 @@ import {
   Route,
   withRouter,
   RouteComponentProps,
-  useLocation
+  useLocation,
 } from "react-router-dom";
 import AddressForm from "../recipient/AddressForm";
 import DeliveryNote from "../recipient/DeliveryNote";
@@ -14,12 +14,13 @@ import { createNewRequest } from "../utils/firestore";
 import { confirmOrderReq } from "../utils/functions";
 import { getPhone } from "../utils/data";
 import { saveOrderLocation } from "../utils/database";
+import ConfirmText from "../components/ConfirmText";
 
 export const screenIds = {
   ADDRESS: "ADDRESS",
   DELIVERY: "DELIVERY",
   BUNDLES: "BUNDLES",
-  PHONE: "PHONE"
+  PHONE: "PHONE",
 };
 
 export const PATH_ADDRESS = "/address";
@@ -32,7 +33,7 @@ const nextPathMap = {
   [screenIds.ADDRESS]: PATH_DELIVERY,
   [screenIds.DELIVERY]: PATH_PHONE,
   [screenIds.BUNDLES]: PATH_ADDRESS,
-  [screenIds.PHONE]: PATH_CONFIRM
+  [screenIds.PHONE]: PATH_CONFIRM,
 };
 
 const STEPS = [
@@ -40,7 +41,7 @@ const STEPS = [
   PATH_ADDRESS,
   PATH_DELIVERY,
   PATH_PHONE,
-  PATH_CONFIRM
+  PATH_CONFIRM,
 ];
 
 const calculateStep = (
@@ -71,7 +72,7 @@ const Recipient = ({ history }: RouteComponentProps) => {
   const updateState = ({ screenId, inputs }: any) => {
     setRecipientState({
       ...recipientState,
-      [screenId]: inputs
+      [screenId]: inputs,
     });
     history.push(nextPathMap[screenId]);
     if (screenId === screenIds.PHONE) setIsComplete(true);
@@ -101,9 +102,10 @@ const Recipient = ({ history }: RouteComponentProps) => {
   const confirmOrder = (confirmed: boolean) => {
     if (!confirmed) return;
     setIsConfirmed(confirmed);
+    saveOrderLocation(orderId, recipientState);
     setRecipientState({
       ...recipientState,
-      isConfirmed: confirmed
+      isConfirmed: confirmed,
     });
   };
 
@@ -115,10 +117,7 @@ const Recipient = ({ history }: RouteComponentProps) => {
    */
   if (isComplete && !isCreated) {
     // optimistic assumption here
-    createNewRequest(recipientState).then(id => {
-      saveOrderLocation(id, recipientState);
-      setOrderId(id);
-    });
+    createNewRequest(recipientState).then((id) => setOrderId(id));
     confirmOrderReq(recipientState);
     setIsCreated(true);
   }
@@ -150,10 +149,11 @@ const Recipient = ({ history }: RouteComponentProps) => {
       <Route
         path={PATH_CONFIRM}
         exact
-        component={props =>
+        component={(props) =>
           orderId ? (
             <Confirm
               orderId={orderId}
+              phone={getPhone(recipientState)}
               confirmOrder={confirmOrder}
               isConfirmed={isConfirmed}
               {...props}

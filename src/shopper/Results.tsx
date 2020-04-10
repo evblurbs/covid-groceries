@@ -1,68 +1,83 @@
 import React, { useState } from "react";
-import { Box, RadioButtonGroup, ResponsiveContext } from "grommet";
+import { Box, RadioButtonGroup, ResponsiveContext, Grid } from "grommet";
 import Navigate from "../form/Navigate";
 import Header from "../components/Header";
 import Description from "../components/Description";
 import { fetchOrderIDs } from "../utils/database";
 import { screenIds, PATH_SEARCH } from "../routes/Shopper";
 import Result from "./Result";
+import "./results.css";
+
+const columnsMap = {
+  small: ["100%"],
+  medium: ["50%", "0%", "50%", "0%"],
+  large: ["33%", "0%", "33%", "0%", "33%", "1%"],
+};
 
 const ResultsView = ({ results, next }) => {
   const [result, setResult] = useState("");
   const [response, setResponse] = useState({});
 
   const size = React.useContext(ResponsiveContext);
-
+  console.log("size", size);
   return (
-    <Box width="large">
+    <Box width="xlarge">
       <fieldset style={{ border: "none", padding: 0 }}>
         <legend>
           <Header>Results</Header>
-          <Description>
-            Select a result below to choose the order you want to fulfill.
-          </Description>
-          <RadioButtonGroup
-            name="bundle"
-            justify="center"
-            align="center"
-            direction={size === "small" ? "column" : "row"}
-            gap="medium"
-            height={{
-              min: "unset",
-            }}
-            options={results.map(({ key, location, distance }, index) => ({
-              value: key,
-              key,
-              location,
-              distance,
-              index,
-            }))}
-            value={result}
-            wrap={true}
-            onChange={({ target: { value } }) => {
-              setResult(value);
-              setResponse({
-                screenId: screenIds.RESULTS,
-                inputs: { result: value },
-              });
-            }}
-          >
-            {(
-              { key, location, distance }: any,
-              { checked, hover }: { checked: boolean; hover: boolean }
-            ) => {
-              return (
-                <Result
-                  key={key}
-                  value={key}
-                  location={location}
-                  distance={distance}
-                  checked={checked}
-                  hover={hover}
-                />
-              );
-            }}
-          </RadioButtonGroup>
+          {results.length ? (
+            <React.Fragment>
+              <Description>
+                <b>Select a recipient below to donate to.</b> The results are
+                sorted by distance. The items listed are just suggestions.
+              </Description>
+              <RadioButtonGroup
+                name="bundle"
+                options={results.map(({ key, location, distance }, index) => ({
+                  value: key,
+                  key,
+                  location,
+                  distance,
+                  index,
+                  style: { width: "100%" },
+                }))}
+                value={result}
+                as={Grid}
+                // @ts-ignore
+                columns={columnsMap[size]}
+                onChange={({ target: { value } }) => {
+                  setResult(value);
+                  setResponse({
+                    screenId: screenIds.RESULTS,
+                    inputs: { result: value },
+                  });
+                }}
+                margin={{ top: "medium" }}
+                className="results"
+                gap="small"
+              >
+                {(
+                  { key, location, distance }: any,
+                  { checked, hover }: { checked: boolean; hover: boolean }
+                ) => {
+                  return (
+                    <Result
+                      key={key}
+                      value={key}
+                      location={location}
+                      distance={distance}
+                      checked={checked}
+                      hover={hover}
+                    />
+                  );
+                }}
+              </RadioButtonGroup>
+            </React.Fragment>
+          ) : (
+            <Description>
+              There are no results for your location. Thank you for checking! ❤️
+            </Description>
+          )}
         </legend>
       </fieldset>
       <Navigate

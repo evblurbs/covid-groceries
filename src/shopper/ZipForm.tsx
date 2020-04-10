@@ -19,9 +19,10 @@ const ZipForm = ({ next }: StepCallback) => {
 
   const handlePlaceSelect = () => {
     const {
-      geometry: { location },
+      geometry: { location = undefined } = {},
       formatted_address,
     } = autocomplete.getPlace();
+    if (!location) return;
     const lat = location.lat();
     const lng = location.lng();
     setDisabled(false);
@@ -87,7 +88,7 @@ const ZipForm = ({ next }: StepCallback) => {
         reverse
         name="zip"
         label="Postal Code"
-        desc="Enter your postal code to search for potential deliveries near you."
+        desc="Enter your postal code or address to search for potential recipients near you. Make sure to select a location from the search dropdown."
       />
       <Navigate disabled={disabled} onClick={onSubmit} backPath="/" />
     </Box>

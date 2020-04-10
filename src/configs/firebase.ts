@@ -20,4 +20,5 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
 export const db = firebase.firestore();
+export const FieldValue = firebase.firestore.FieldValue;
 export const realTimeDb = firebase.database();
