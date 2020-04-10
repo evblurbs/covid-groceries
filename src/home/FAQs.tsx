@@ -106,7 +106,7 @@ const FAQs = () => (
     />
     <Expander
       startOpen={true}
-      title="Do the volunteer shopper have to buy the groceries?"
+      title="Do the volunteer shopper's have to buy the groceries?"
       description="Yes. Handling payments would prolong making this available. We also know a lot of people without work are in need of donations."
     />
     <Expander
