@@ -33,9 +33,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deployHosting": "firebase deploy --only hosting",
-    "deployFunctions": "firebase deploy --only functions",
-    "deploy": "firebase deploy"
+    "deploy": "npm run deployStaging && npm run deployProd",
+    "deployStaging": "firebase deploy -P staging",
+    "deployProd": "firebase deploy -P default"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -17,7 +17,7 @@ const GetStarted = () => {
           Recipient (high risk)
         </Heading>
         <Paragraph size="large" margin={{ top: "small", bottom: "medium" }}>
-          Afraid to goto the grocery store? See if we can find someone to drop
+          Afraid to go to the grocery store? See if we can find someone to drop
           off some donated items to hold you over (est. delivery time in days).
         </Paragraph>
         <RoutedButton

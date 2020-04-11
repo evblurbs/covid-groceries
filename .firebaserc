@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "covid-groceries-f59a0"
+    "default": "covid-groceries-f59a0",
+    "staging": "beta-grocery-pals"
   }
 }

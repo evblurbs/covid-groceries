@@ -15,7 +15,22 @@ const firebaseConfig = {
   measurementId: "G-6V68DZL05T",
 };
 
-firebase.initializeApp(firebaseConfig);
+const firebaseStagingConfig = {
+  apiKey: "AIzaSyCI_yy98lVOhd8Q_yod21eLREHZ6BEXWSE",
+  authDomain: "beta-grocery-pals.firebaseapp.com",
+  databaseURL: "https://beta-grocery-pals.firebaseio.com",
+  projectId: "beta-grocery-pals",
+  storageBucket: "beta-grocery-pals.appspot.com",
+  messagingSenderId: "257888890902",
+  appId: "1:257888890902:web:74e590ded3c818fb0ec537",
+  measurementId: "G-LBRT6J5VS8",
+};
+
+firebase.initializeApp(
+  window.location.hostname === "grocerypals.org"
+    ? firebaseConfig
+    : firebaseStagingConfig
+);
 
 firebase.analytics();
 

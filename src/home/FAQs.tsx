@@ -3,7 +3,7 @@ import { Heading, Anchor } from "grommet";
 import Expander from "../components/Expander";
 
 const DataDesc = () => (
-  <span>
+  <div>
     We strongly believe so. We do not store any identifying data such as names
     or email addresses. The most sensitive type of data we store are phone
     numbers which are used for SMS notifications. We use the Google Cloud
@@ -50,7 +50,7 @@ const DataDesc = () => (
         without credentials.
       </li>
     </ul>
-  </span>
+  </div>
 );
 
 const ImmediateDesc = () => (

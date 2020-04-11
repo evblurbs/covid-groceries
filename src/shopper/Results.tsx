@@ -19,11 +19,10 @@ const ResultsView = ({ results, next }) => {
   const [response, setResponse] = useState({});
 
   const size = React.useContext(ResponsiveContext);
-  console.log("size", size);
   return (
     <Box width="xlarge">
-      <fieldset style={{ border: "none", padding: 0 }}>
-        <legend>
+      <fieldset style={{ border: "none", padding: 0, width: "100%" }}>
+        <legend style={{ width: "100%" }}>
           <Header>Results</Header>
           {results.length ? (
             <React.Fragment>
