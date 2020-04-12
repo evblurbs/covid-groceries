@@ -74,7 +74,10 @@ const ResultsView = ({ results, next }) => {
             </React.Fragment>
           ) : (
             <Description>
-              There are no results for your location. Thank you for checking! ❤️
+              There are no results for your location. Thank you for checking!{" "}
+              <span role="img" aria-label="heart">
+                ❤️
+              </span>
             </Description>
           )}
         </legend>

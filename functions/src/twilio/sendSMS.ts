@@ -1,10 +1,14 @@
+import * as functions from "firebase-functions";
 import client from "./client";
+
+const twilioConfig = functions.config().twilio;
+const { phone } = twilioConfig;
 
 const sendSMS = (toNumber: string, message: string) => {
   return client.messages.create({
     to: toNumber,
-    from: "+12062782581",
-    body: message
+    from: phone,
+    body: message,
   });
 };
 

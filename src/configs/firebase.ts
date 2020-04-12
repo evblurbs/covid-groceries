@@ -26,14 +26,20 @@ const firebaseStagingConfig = {
   measurementId: "G-LBRT6J5VS8",
 };
 
-firebase.initializeApp(
-  window.location.hostname === "grocerypals.org"
-    ? firebaseConfig
-    : firebaseStagingConfig
-);
+const functionsUrlProd =
+  "https://us-central1-covid-groceries-f59a0.cloudfunctions.net";
+const functionsUrlBeta =
+  "https://us-central1-beta-grocery-pals.cloudfunctions.net";
+
+const isProd = window.location.hostname === "grocerypals.org";
+
+const config = isProd ? firebaseConfig : firebaseStagingConfig;
+
+firebase.initializeApp(config);
 
 firebase.analytics();
 
 export const db = firebase.firestore();
 export const FieldValue = firebase.firestore.FieldValue;
 export const realTimeDb = firebase.database();
+export const functionsUrl = isProd ? functionsUrlProd : functionsUrlBeta;
