@@ -2,13 +2,15 @@ import dbFunc from "../firestore/textConfirmed";
 import shopperConfirmed from "../firestore/shopperConfirmed";
 import delivered from "../firestore/delivered";
 import orderLookup from "../firestore/orderLookup";
-import sendSMS from "../twilio/sendSMS";
+// import sendSMS from "../twilio/sendSMS";
 import {
   textConfirmedMessage,
   shopperConfirmedMessage,
+  deliveryDoneMessage,
   confirmDeliveryOrder,
   confirmDeliveryShopper,
 } from "../twilio/messages";
+import TwilioResponse from "../twilio/response";
 
 const smsReply = (request: any, response: any): any => {
   const { Body, From } = request.body;
@@ -17,16 +19,19 @@ const smsReply = (request: any, response: any): any => {
   // Order confirmations
   if (text === "YES") {
     return dbFunc(From)
-      .then(() => sendSMS(From, textConfirmedMessage))
-      .then(() => response.status(200).send({ sent: true }))
+      .then(() => TwilioResponse(response, textConfirmedMessage))
       .catch((err: any) => console.log("err", err));
   }
 
   // Shopper confirmations
   if (text === "PAL") {
     return shopperConfirmed(From)
-      .then(() => sendSMS(From, shopperConfirmedMessage))
-      .then(() => response.status(200).send({ sent: true }))
+      .then((data) =>
+        TwilioResponse(response, [
+          shopperConfirmedMessage(data),
+          deliveryDoneMessage,
+        ])
+      )
       .catch((err: any) => console.log("err", err));
   }
 
@@ -35,9 +40,13 @@ const smsReply = (request: any, response: any): any => {
   if (done === "DONE") {
     return delivered(From)
       .then((orderId) => orderLookup(orderId))
-      .then(({ phone }: any) => sendSMS(phone, confirmDeliveryOrder(doneText)))
-      .then(() => sendSMS(From, confirmDeliveryShopper))
-      .then(() => response.status(200).send({ sent: true }))
+      .then(({ phone }: any) =>
+        TwilioResponse(
+          response,
+          [confirmDeliveryOrder(doneText), confirmDeliveryShopper],
+          [phone]
+        )
+      )
       .catch((err: any) => console.log("err", err));
   }
 

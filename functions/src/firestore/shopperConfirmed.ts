@@ -1,5 +1,11 @@
 import db from "./db";
 
+interface OrderData {
+  formattedAddress: string;
+  bundle: string;
+  deliveryNote: string;
+}
+
 const shopperConfirmed = (phone: string) =>
   db
     .collection("shoppers")
@@ -21,7 +27,9 @@ const shopperConfirmed = (phone: string) =>
       const orderLookupRef = db.collection("orderLookup").doc(data.orderId);
       batch.update(orderLookupRef, { shopper: phone });
 
-      return batch.commit();
-    });
+      return batch.commit().then(() => data.orderId);
+    })
+    .then((id) => db.collection("orders").doc(id).get())
+    .then((doc) => doc.data() as OrderData);
 
 export default shopperConfirmed;
