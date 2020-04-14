@@ -1,6 +1,6 @@
 import React from "react";
 import { Carousel, Heading, ResponsiveContext } from "grommet";
-import { MapLocation, Basket, Chat, Search, Cart, Car } from "grommet-icons";
+import { Basket, Chat, Cart, Car } from "grommet-icons";
 import CarouselCard from "../components/CarouselCard";
 
 const HomeCarousel = () => {
@@ -39,7 +39,7 @@ const HomeCarousel = () => {
           bgColor="accent-4"
           header="4. Notifications"
           Icon={Chat}
-          description="We notify the recipient via SMS that their donations has been delivered and thanks the grocery pal for their time."
+          description="We notify the recipient via SMS that their donations have been delivered and thank the grocery pal for their time."
         />
       </Carousel>
     </React.Fragment>

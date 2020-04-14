@@ -41,13 +41,13 @@ const DataDesc = () => (
           phone numbers are not stored in this data set, but instead in a more
           secure location that requires credentials
         </em>
-        ).
+        )
       </li>
       <li>
         <b>Grocery Pal Confirmed</b>: We store a flag to indicate whether we
         have connected the recipient with a Grocery Pal or donor. Once this flag
         changes from false to true, all the data above is no longer accessible
-        without credentials.
+        without credentials
       </li>
     </ul>
   </div>
@@ -55,10 +55,9 @@ const DataDesc = () => (
 
 const ImmediateDesc = () => (
   <span>
-    <b>Do not use Grocery Pals!</b> Contact 911 for an emergency or a close
-    relative and/or friend for immediate concerns. We cannot guarantee you will
-    receive anything, or if you do, we can't promise it will be the item you
-    need.
+    Please use food banks, family, and close friends if you need an item
+    immediately. We cannot guarantee you will receive anything, or if you do, we
+    can't promise when and what will be delivered.
   </span>
 );
 
@@ -102,7 +101,7 @@ const FAQs = () => (
     <Expander
       startOpen={true}
       title="Why was this created?"
-      description="During this COVID-19 crises, we've found grocery delivery services like Instacart and Amazon Fresh unavailable due to demand. We were surprised to see how crowded our local grocery store was, especially with people who might be at higher risk. We also saw generous people offering to drop off groceries to those in need, and figured we could help connect the dots."
+      description="During this COVID-19 crisis, we've found grocery delivery services like Instacart and Amazon Fresh unavailable due to demand. We were surprised to see how crowded our local grocery store was, especially with people who might be at higher risk. We also saw generous people offering to drop off groceries to those in need, and figured we could help connect the dots."
     />
     <Expander
       startOpen={true}
@@ -115,7 +114,7 @@ const FAQs = () => (
     />
     <Expander
       title="Why can't I be a Grocery Pal unless I'm shopping for myself?"
-      description="If you shop for yourself and someone else at the same time, you reduce the traffic in a grocery store. Thus, you are also reducing the exposure for yourself and the other shoppers. Also, we've found the bottle neck of connecting recipients and donors is not with donors, but instead with signing up those in need. Luckily, many people want to help."
+      description="If you shop for yourself and someone else at the same time, you reduce the traffic in a grocery store. Thus, you are also reducing the exposure for yourself and the other shoppers. Also, we've found the bottleneck of connecting recipients and donors is not with donors, but instead with signing up those in need. Luckily, many people want to help."
     />
     <Expander
       title="What if I don't receive my items or get the specific item(s) needed?"

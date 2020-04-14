@@ -14,7 +14,6 @@ import { createNewRequest } from "../utils/firestore";
 import { confirmOrderReq } from "../utils/functions";
 import { getPhone } from "../utils/data";
 import { saveOrderLocation } from "../utils/database";
-import ConfirmText from "../components/ConfirmText";
 
 export const screenIds = {
   ADDRESS: "ADDRESS",
@@ -121,8 +120,6 @@ const Recipient = ({ history }: RouteComponentProps) => {
     confirmOrderReq(recipientState);
     setIsCreated(true);
   }
-
-  console.log("recipient state", recipientState);
 
   return (
     <React.Fragment>

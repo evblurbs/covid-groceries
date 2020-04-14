@@ -1,6 +1,5 @@
 import { db, FieldValue } from "../configs/firebase";
 import { normalizeRecipientState, normalizeShopperState } from "./data";
-import { formatPhone } from "./strings";
 
 export const createNewRequest = (state) => {
   const { phone, ...data } = normalizeRecipientState(state);

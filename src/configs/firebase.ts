@@ -43,3 +43,4 @@ export const db = firebase.firestore();
 export const FieldValue = firebase.firestore.FieldValue;
 export const realTimeDb = firebase.database();
 export const functionsUrl = isProd ? functionsUrlProd : functionsUrlBeta;
+export const analytics = firebase.analytics;

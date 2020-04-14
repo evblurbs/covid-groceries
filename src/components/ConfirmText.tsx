@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Heading, Paragraph, Button } from "grommet";
-import { FormPrevious, Refresh } from "grommet-icons";
-import RoutedButton from "../components/RoutedButton";
+import { Refresh } from "grommet-icons";
 
 /*
  * We currently don't allow to go back and

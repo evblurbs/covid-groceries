@@ -1,12 +1,10 @@
 import React from "react";
-import { Box, Heading, ResponsiveContext } from "grommet";
+import { Box, Heading } from "grommet";
 import HowItWorks from "../home/HowItWorks";
 import GetStarted from "../home/GetStarted";
 import FAQs from "../home/FAQs";
 
 function Home() {
-  const size = React.useContext(ResponsiveContext);
-  console.log("size", size);
   return (
     <Box>
       <Heading level={1} size="small">

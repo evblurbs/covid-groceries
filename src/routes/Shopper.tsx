@@ -104,8 +104,6 @@ const Shopper = ({ history }: RouteComponentProps) => {
     setIsCreated(true);
   }
 
-  console.log("shopper state", shopperState);
-
   return (
     <React.Fragment>
       <Route
