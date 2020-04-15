@@ -52,3 +52,28 @@ export const confirmDeliveryOrder = (note: string) =>
 
 export const confirmDeliveryShopper =
   "THANK YOU! You are not only helping someone that is at high risk of becoming ill, but also lowering the exposure for yourself and others shopping at the same time.";
+
+export const foodRequestMessages = [
+  "Please select a grocery bundle you want by replying with one of the following numbers:",
+  "1. Food - canned soups, frozen meals, and fresh vegetables.",
+  "2. Toiletries - soap, cleaning products, and toilet paper.",
+  "3. Food + Toiletries - few household items and groceries.",
+];
+
+export const foodRequestAddress =
+  "Please provide the address for where you would like your groceries delivered. Just provide the address. You will be able to provide delivery instructions in the next step.";
+
+export const foodRequestBundleError =
+  "Sorry, we were unable to handle your response. Please try again by responding with a number (i.e. 1 for the food bundle).";
+
+export const foodRequestDeliveryNote =
+  "Please provide any additional delivery instructions (i.e. leave on front door) or NO to indicate no specific instructions needed.";
+
+export const foodRequestDone =
+  "Thank you! You are all set and we will notify you if we find a grocery pal to drop off some essential items. Please note that although we do our best to match you, there is no guarantee.";
+
+export const foodRequestNoStep =
+  "Sorry, we were unable to handle your response. Please try again.";
+
+export const foodRequestGeocodeError =
+  "We were unable to geocode that address. Please try again.";

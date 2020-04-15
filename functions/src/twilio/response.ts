@@ -3,7 +3,8 @@ const MessagingResponse = require("twilio").twiml.MessagingResponse;
 const response = (
   res: any,
   messages: string | Array<string>,
-  to: string | Array<string> = []
+  to: string | Array<string> = [],
+  redirect?: string
 ) => {
   const twiml = new MessagingResponse();
 
@@ -12,6 +13,10 @@ const response = (
         twiml.message({ to: to[i], method: "POST" }, msg);
       })
     : twiml.message(messages);
+
+  if (redirect) {
+    twiml.redirect(redirect);
+  }
 
   return res
     .set("Content-Type", "text/xml; charset=utf8")

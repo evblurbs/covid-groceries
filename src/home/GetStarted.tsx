@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Heading, Grid, Paragraph, ResponsiveContext } from "grommet";
 import RoutedButton from "../components/RoutedButton";
+import { phone } from "../configs/constants";
 
 const GetStarted = () => {
   const size = React.useContext(ResponsiveContext);
@@ -18,7 +19,8 @@ const GetStarted = () => {
         </Heading>
         <Paragraph size="large" margin={{ top: "small", bottom: "medium" }}>
           Afraid to go to the grocery store? See if we can find someone to drop
-          off some donated items to hold you over (est. delivery time in days).
+          off some donated items to hold you over by clicking below or texting{" "}
+          FOOD to <b>{phone}</b>.
         </Paragraph>
         <RoutedButton
           path="/bundles"

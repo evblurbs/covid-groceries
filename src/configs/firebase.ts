@@ -2,7 +2,7 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/database";
 import "firebase/analytics";
-import { FIREBASE_API_KEY } from "./constants";
+import { FIREBASE_API_KEY, isProd } from "./constants";
 
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
@@ -30,8 +30,6 @@ const functionsUrlProd =
   "https://us-central1-covid-groceries-f59a0.cloudfunctions.net";
 const functionsUrlBeta =
   "https://us-central1-beta-grocery-pals.cloudfunctions.net";
-
-const isProd = window.location.hostname === "grocerypals.org";
 
 const config = isProd ? firebaseConfig : firebaseStagingConfig;
 
