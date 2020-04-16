@@ -18,9 +18,8 @@ const GetStarted = () => {
           Recipient (high risk)
         </Heading>
         <Paragraph size="large" margin={{ top: "small", bottom: "medium" }}>
-          Afraid to go to the grocery store? See if we can find someone to drop
-          off some donated items to hold you over by clicking below or texting{" "}
-          FOOD to <b>{phone}</b>.
+          Click below or text FOOD to <b>{phone}</b> to see if we can find
+          someone to drop off some donated groceries.
         </Paragraph>
         <RoutedButton
           path="/bundles"
